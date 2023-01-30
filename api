@@ -1,0 +1,28 @@
+<?php
+
+// API endpoint URL
+$api_url = 'http://api.openweathermap.org/data/2.5/weather?q=CITY_NAME&appid=YOUR_APP_ID&units=metric';
+
+// Replace CITY_NAME with the desired city name
+$city = 'London';
+$api_url = str_replace('CITY_NAME', $city, $api_url);
+
+// Replace YOUR_APP_ID with your OpenWeatherMap API key
+$app_id = 'abcdefghijklmnopqrstuvwxyz';
+$api_url = str_replace('YOUR_APP_ID', $app_id, $api_url);
+
+// Make API call and get response
+$response = file_get_contents($api_url);
+
+// Decode JSON response
+$weather_data = json_decode($response, true);
+
+// Get temperature and weather description
+$temperature = $weather_data['main']['temp'];
+$description = $weather_data['weather'][0]['description'];
+
+// Display weather data
+echo 'Temperature: '.$temperature.'°C<br>';
+echo 'Weather: '.$description.'<br>';
+
+?>
